@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 public class Unit : NetworkBehaviour
 {
+    [SerializeField] private UnitMovement _unitMovement;
     [SerializeField] private UnityEvent _onSelected;
     [SerializeField] private UnityEvent _onDeselected;
 
@@ -30,4 +31,9 @@ public class Unit : NetworkBehaviour
     }
 
     #endregion
+
+    public UnitMovement GetUnitMovement()
+    {
+        return _unitMovement;
+    }
 }

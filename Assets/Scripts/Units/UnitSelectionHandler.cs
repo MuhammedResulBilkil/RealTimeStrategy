@@ -10,7 +10,7 @@ public class UnitSelectionHandler : MonoBehaviour
     
     private Camera _mainCamera;
 
-    private List<Unit> _selectedUnits = new List<Unit>();
+    public List<Unit> SelectedUnits { get; } = new List<Unit>();
 
     private void Awake()
     {
@@ -31,10 +31,10 @@ public class UnitSelectionHandler : MonoBehaviour
 
     private void AreaDeselection()
     {
-        foreach (Unit selectedUnit in _selectedUnits)
+        foreach (Unit selectedUnit in SelectedUnits)
             selectedUnit.Deselect();
         
-        _selectedUnits.Clear();
+        SelectedUnits.Clear();
     }
 
     private void AreaSelection()
@@ -47,9 +47,9 @@ public class UnitSelectionHandler : MonoBehaviour
         
         if(!unit.hasAuthority) return;
 
-        _selectedUnits.Add(unit);
+        SelectedUnits.Add(unit);
 
-        foreach (Unit selectedUnit in _selectedUnits)
+        foreach (Unit selectedUnit in SelectedUnits)
             selectedUnit.Select();
 
     }
