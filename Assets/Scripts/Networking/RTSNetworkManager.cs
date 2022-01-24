@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RTSNetworkManager : NetworkManager
 {
-    [SerializeField] private GameObject unitSpawnerPrefab = null;
+    [SerializeField] private GameObject unitSpawnerPrefab;
     
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
