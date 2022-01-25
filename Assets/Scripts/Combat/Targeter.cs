@@ -24,10 +24,9 @@ public class Targeter : NetworkBehaviour
 
     #endregion
 
-    #region Client
-
-    
-
-    #endregion
+    public Targetable GetTarget()
+    {
+        return _target;
+    }
     
 }
