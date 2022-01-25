@@ -47,8 +47,6 @@ public class Unit : NetworkBehaviour
     [Client]
     public void Select()
     {
-        Debug.Log("Select");
-        
         if(!hasAuthority)
             return;
         

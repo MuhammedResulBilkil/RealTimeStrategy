@@ -19,12 +19,6 @@ public class UnitSpawner : NetworkBehaviour, IPointerClickHandler
 
     #endregion
 
-    #region Client
-
-    
-
-    #endregion
-
     public void OnPointerClick(PointerEventData eventData)
     {
         if(eventData.button != PointerEventData.InputButton.Left)
