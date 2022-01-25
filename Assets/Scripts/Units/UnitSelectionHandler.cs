@@ -43,11 +43,14 @@ public class UnitSelectionHandler : MonoBehaviour
     
     private void StartSelectionArea()
     {
-        foreach (Unit selectedUnit in SelectedUnits)
-            selectedUnit.Deselect();
+        if (!Keyboard.current.leftShiftKey.isPressed)
+        {
+            foreach (Unit selectedUnit in SelectedUnits)
+                selectedUnit.Deselect();
         
-        SelectedUnits.Clear();
-
+            SelectedUnits.Clear();
+        }
+        
         _unitSelectionArea.gameObject.SetActive(true);
         _unitSelectionAreaStartPosition = Mouse.current.position.ReadValue();
         UpdateSelectionArea();
@@ -69,7 +72,7 @@ public class UnitSelectionHandler : MonoBehaviour
     {
         _unitSelectionArea.gameObject.SetActive(false);
 
-        if (_unitSelectionArea.sizeDelta.magnitude == 0)
+        if (_unitSelectionArea.sizeDelta.sqrMagnitude == 0)
         {
             Ray ray = _mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
@@ -92,6 +95,8 @@ public class UnitSelectionHandler : MonoBehaviour
 
         foreach (Unit myUnit in _rtsPlayer.GetMyUnits())
         {
+            if(SelectedUnits.Contains(myUnit)) continue;
+            
             Vector2 screenPosition = _mainCamera.WorldToScreenPoint(myUnit.transform.position);
 
             if (screenPosition.x > min.x && screenPosition.x < max.x && screenPosition.y > min.y &&

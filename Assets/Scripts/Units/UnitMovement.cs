@@ -12,6 +12,15 @@ public class UnitMovement : NetworkBehaviour
 
     #region Server
 
+    [ServerCallback]
+    private void Update()
+    {
+        if(!_navMeshAgent.hasPath) return;
+        if(_navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance) return;
+        
+        _navMeshAgent.ResetPath();
+    }
+
     [Command]
     public void CmdMove(Vector3 position)
     {
