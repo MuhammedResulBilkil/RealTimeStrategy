@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Unit : NetworkBehaviour
 {
     [SerializeField] private UnitMovement _unitMovement;
+    [SerializeField] private Targeter _targeter;
     [SerializeField] private UnityEvent _onSelected;
     [SerializeField] private UnityEvent _onDeselected;
 
@@ -67,5 +68,10 @@ public class Unit : NetworkBehaviour
     public UnitMovement GetUnitMovement()
     {
         return _unitMovement;
+    }
+
+    public Targeter GetTargeter()
+    {
+        return _targeter;
     }
 }

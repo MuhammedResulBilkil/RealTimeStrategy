@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 public class UnitMovement : NetworkBehaviour
 {
     [SerializeField] private NavMeshAgent _navMeshAgent;
+    [SerializeField] private Targeter _targeter;
 
     #region Server
 
@@ -24,6 +25,8 @@ public class UnitMovement : NetworkBehaviour
     [Command]
     public void CmdMove(Vector3 position)
     {
+        _targeter.ClearTarget();
+        
         if(!NavMesh.SamplePosition(position, out NavMeshHit hit, 1f, NavMesh.AllAreas ))
             return;
 
