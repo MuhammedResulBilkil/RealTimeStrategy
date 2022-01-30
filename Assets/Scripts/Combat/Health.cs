@@ -5,10 +5,11 @@ using UnityEngine;
 public class Health : NetworkBehaviour
 {
     public event Action OnServerDie;
-    
+    public event Action<int, int> OnClientHealthUpdated; 
+
     [SerializeField] private int maxHealth = 100;
 
-    [SyncVar] private int _currentHealth;
+    [SyncVar(hook = nameof(HandleHealthUpdated))] private int _currentHealth;
 
     #region Server
 
@@ -35,7 +36,10 @@ public class Health : NetworkBehaviour
 
     #region Client
 
-    
+    private void HandleHealthUpdated(int oldHealth, int newHealth)
+    {
+        OnClientHealthUpdated?.Invoke(newHealth, maxHealth);
+    }
 
     #endregion
 }
