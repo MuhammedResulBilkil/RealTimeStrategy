@@ -8,6 +8,16 @@ public class Targeter : NetworkBehaviour
 
     #region Server
 
+    public override void OnStartServer()
+    {
+        GameOverHandler.OnServerGameOver += ServerHandleGameOver;
+    }
+
+    public override void OnStopServer()
+    {
+        GameOverHandler.OnServerGameOver -= ServerHandleGameOver;
+    }
+
     [Command]
     public void CmdSetTarget(GameObject targetGameObject)
     {
@@ -20,6 +30,12 @@ public class Targeter : NetworkBehaviour
     public void ClearTarget()
     {
         _target = null;
+    }
+    
+    [Server]
+    private void ServerHandleGameOver()
+    {
+        ClearTarget();
     }
 
     #endregion

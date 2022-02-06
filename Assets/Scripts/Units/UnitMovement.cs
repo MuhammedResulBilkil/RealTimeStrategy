@@ -14,6 +14,16 @@ public class UnitMovement : NetworkBehaviour
 
     #region Server
 
+    public override void OnStartServer()
+    {
+        GameOverHandler.OnServerGameOver += ServerHandleGameOver;
+    }
+
+    public override void OnStopServer()
+    {
+        GameOverHandler.OnServerGameOver += ServerHandleGameOver;
+    }
+
     [ServerCallback]
     private void Update()
     {
@@ -50,6 +60,12 @@ public class UnitMovement : NetworkBehaviour
             return;
 
         _navMeshAgent.SetDestination(hit.position);
+    }
+    
+    [Server]
+    private void ServerHandleGameOver()
+    { 
+        _navMeshAgent.ResetPath();
     }
 
     #endregion

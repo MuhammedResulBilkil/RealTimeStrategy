@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class GameOverHandler : NetworkBehaviour
 {
-    public static event Action<string> OnClientGameOver; 
+    public static event Action OnServerGameOver;
+    public static event Action<string> OnClientGameOver;
 
     private List<UnitBase> _unitBases = new List<UnitBase>();
 
@@ -35,10 +36,12 @@ public class GameOverHandler : NetworkBehaviour
         _unitBases.Remove(unitBase);
         
         if(_unitBases.Count != 1) return;
-
+        
         int playerID = _unitBases[0].connectionToClient.connectionId;
         
         RpcGameOver($"Player {playerID}");
+        
+        OnServerGameOver?.Invoke();
     }
 
     #endregion
