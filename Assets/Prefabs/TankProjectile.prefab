@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2758116549098604567}
   - component: {fileID: 7304899189033538395}
   - component: {fileID: 8543632794312851590}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TankProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,5 +146,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   _rigidbody: {fileID: 2758116549098604567}
+  _damageToDeal: 20
   _destroyAfterSeconds: 5
   _launchForce: 10
